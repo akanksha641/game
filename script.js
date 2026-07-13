@@ -2,35 +2,33 @@ let score = 0;
 let time = 30;
 let timer;
 
-const scoreDisplay = document.getElementById("score");
-const timeDisplay = document.getElementById("time");
-const coin = document.getElementById("coin");
-const startBtn = document.getElementById("startBtn");
+document.getElementById("startBtn").onclick = function () {
 
-startBtn.addEventListener("click", startGame);
-
-function startGame() {
     score = 0;
     time = 30;
 
-    scoreDisplay.textContent = score;
-    timeDisplay.textContent = time;
+    document.getElementById("score").innerText = score;
+    document.getElementById("time").innerText = time;
 
-    coin.style.display = "block";
+    document.getElementById("coin").style.display = "block";
 
-    timer = setInterval(() => {
+    clearInterval(timer);
+
+    timer = setInterval(function () {
+
         time--;
-        timeDisplay.textContent = time;
+        document.getElementById("time").innerText = time;
 
-        if (time === 0) {
+        if (time <= 0) {
             clearInterval(timer);
-            coin.style.display = "none";
-            alert("Game Over! Your Score: " + score);
+            document.getElementById("coin").style.display = "none";
+            alert("Game Over! Score = " + score);
         }
-    }, 1000);
-}
 
-coin.addEventListener("click", () => {
+    }, 1000);
+};
+
+document.getElementById("coin").onclick = function () {
     score++;
-    scoreDisplay.textContent = score;
-});
+    document.getElementById("score").innerText = score;
+};
